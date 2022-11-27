@@ -1,10 +1,21 @@
-import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { ClassSerializerInterceptor, Module } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
+import { APP_INTERCEPTOR } from '@nestjs/core';
+
+import configuration from './config/config';
 
 @Module({
-	imports: [],
-	controllers: [AppController],
-	providers: [AppService],
+	providers: [
+		{
+			provide: APP_INTERCEPTOR,
+			useClass: ClassSerializerInterceptor,
+		},
+	],
+	imports: [
+		ConfigModule.forRoot({
+			isGlobal: true,
+			load: [configuration],
+		}),
+	],
 })
 export class AppModule {}
