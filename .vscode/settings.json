@@ -1,0 +1,10 @@
+{
+	"diffEditor.ignoreTrimWhitespace": false,
+	"editor.insertSpaces": false,
+	"editor.renderWhitespace": "boundary",
+	"files.insertFinalNewline": true,
+	"files.trimFinalNewlines": true,
+	"editor.detectIndentation": false,
+	"editor.formatOnSave": true,
+	"editor.defaultFormatter": "esbenp.prettier-vscode"
+}
