@@ -1,12 +1,12 @@
 import { NestFastifyApplication } from '@nestjs/platform-fastify';
-import { handlebars } from 'hbs';
+import * as pug from 'pug';
 import { join } from 'path';
 
 export const setViewEngine = (app: NestFastifyApplication): void => {
 	app.setViewEngine({
 		engine: {
-			handlebars,
+			pug,
 		},
-		templates: join(__dirname, '..', 'views'),
+		templates: join(__dirname, '..', '..', '..', 'views'),
 	});
 };
