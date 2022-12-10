@@ -1,4 +1,27 @@
 extends ../layout.pug 
 
 block content
-	h1 Expenses list
+	include ../common/header.pug
+	include add-expense.pug
+
+	.page.active
+		h1 Liste des dépenses
+		.field.label.suffix.border
+			input(type="text")
+			label Rechercher une dépense
+			i search
+		table.border.medium-space
+			thead
+				tr
+					th Nom
+					th Montant
+					th Date
+					th Récurrent
+			tbody
+				each expense in expenses
+					tr
+						td= expense.name
+						td= `${expense.amount} €`
+						td= expense.date.toLocaleDateString("fr")
+						td= expense.isRecurrent
+		button(data-ui="#add-expense-modal") Ajouter une dépense

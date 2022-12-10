@@ -1,10 +1,13 @@
 doctype html
-html
+html(lang="fr")
 	head
 		title Pelit
 		meta(charset="utf-8")
 		meta(name="description", content="Pelit application")
 		meta(name="viewport", content="width=device-width, initial-scale=1.0")
+		link(rel="stylesheet", href="https://cdn.jsdelivr.net/npm/beercss@2.3.0/dist/cdn/beer.min.css")
 		link(rel="icon", href="favicon.ico")
+		block scripts 
+			script(type="text/javascript", src="https://cdn.jsdelivr.net/npm/beercss@2.3.0/dist/cdn/beer.min.js")
 	body
 		block content
