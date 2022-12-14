@@ -1,8 +1,8 @@
 extends ../layout.pug 
 
 block content
-	include ../common/header.pug
-	include add-expense.pug
+	include add-expense-modal.pug
+	include delete-expense-modal.pug
 
 	.page.active
 		h1 Liste des dépenses
@@ -14,14 +14,22 @@ block content
 			thead
 				tr
 					th Nom
+					th Type
 					th Montant
 					th Date
 					th Récurrent
+					th Catégorie
+					th Supprimer
 			tbody
 				each expense in expenses
 					tr
 						td= expense.name
+						td= expense.type
 						td= `${expense.amount} €`
 						td= expense.date.toLocaleDateString("fr")
 						td= expense.isRecurrent
-		button(data-ui="#add-expense-modal") Ajouter une dépense
+						td= expense.category.name
+						td
+							button.transparent.circle(type="button", data-ui="#delete-expense-modal")
+								i delete
+		button(type="button", data-ui="#add-expense-modal") Ajouter une dépense

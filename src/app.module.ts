@@ -6,6 +6,7 @@ import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
 import configuration from './config/config';
 import { Config } from './config/config.interface';
 
+import { CategoriesModule } from './modules/categories/categories.module';
 import { DashboardModule } from './modules/dashboard/dashboard.module';
 import { ExpensesModule } from './modules/expenses/expenses.module';
 
@@ -34,6 +35,7 @@ import { ExpensesModule } from './modules/expenses/expenses.module';
 				} as TypeOrmModuleOptions;
 			},
 		}),
+		CategoriesModule,
 		DashboardModule,
 		ExpensesModule,
 	],

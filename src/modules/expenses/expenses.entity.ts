@@ -1,6 +1,7 @@
-import { Entity, Column } from 'typeorm';
+import { Entity, Column, ManyToOne } from 'typeorm';
 import {
 	IsString,
+	IsEnum,
 	IsNumber,
 	IsDate,
 	IsBoolean,
@@ -15,6 +16,12 @@ import {
 	DecimalToString,
 	DecimalTransformer,
 } from 'src/helpers/decimal-transformer/decimal.transformer';
+import { Category } from 'src/modules/categories/categories.entity';
+
+export enum ExpenseType {
+	EXPENSE = 'Dépense',
+	INCOME = 'Revenu',
+}
 
 @Entity({
 	name: 'expenses',
@@ -24,6 +31,11 @@ export class Expense extends AbstractEntity {
 	@IsString()
 	@IsNotEmpty()
 	name!: string;
+
+	@Column({ enum: ExpenseType })
+	@IsEnum(ExpenseType)
+	@IsNotEmpty()
+	type!: ExpenseType;
 
 	@Column({
 		type: 'decimal',
@@ -45,4 +57,7 @@ export class Expense extends AbstractEntity {
 	@IsBoolean()
 	@ToBoolean()
 	isRecurrent?: boolean;
+
+	@ManyToOne(() => Category, (category) => category.expenses)
+	category!: Category;
 }

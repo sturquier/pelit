@@ -12,10 +12,18 @@ export class ExpensesService {
 	) {}
 
 	public async findAll(): Promise<Expense[]> {
-		return this.expensesRepository.find();
+		return this.expensesRepository.find({
+			relations: {
+				category: true,
+			},
+		});
 	}
 
 	public async create(expensePayload: DeepPartial<Expense>): Promise<Expense> {
 		return this.expensesRepository.save(expensePayload);
+	}
+
+	public async deleteOne(id: string): Promise<void> {
+		await this.expensesRepository.delete(id);
 	}
 }

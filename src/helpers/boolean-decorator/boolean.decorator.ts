@@ -1,6 +1,6 @@
 import { Transform } from 'class-transformer';
 
-import { AbstractEntity } from '../abstract-entity/abstract.entity';
+import { AbstractEntity } from 'src/helpers/abstract-entity/abstract.entity';
 
 const ToBoolean = (): ((target: AbstractEntity, key: string) => void) => {
 	const toPlain: PropertyDecorator = Transform(
