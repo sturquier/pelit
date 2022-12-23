@@ -1,7 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { DeepPartial, Repository } from 'typeorm';
+import { Repository } from 'typeorm';
 
+import { ExpensePayload } from './expenses.dto';
 import { Expense } from './expenses.entity';
 
 @Injectable()
@@ -19,7 +20,7 @@ export class ExpensesService {
 		});
 	}
 
-	public async create(expensePayload: DeepPartial<Expense>): Promise<Expense> {
+	public async create(expensePayload: ExpensePayload): Promise<Expense> {
 		return this.expensesRepository.save(expensePayload);
 	}
 

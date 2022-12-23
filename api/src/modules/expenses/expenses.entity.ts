@@ -1,3 +1,4 @@
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { Entity, Column, ManyToOne } from 'typeorm';
 import {
 	IsString,
@@ -8,7 +9,6 @@ import {
 	IsNotEmpty,
 } from 'class-validator';
 import { Transform } from 'class-transformer';
-import Decimal from 'decimal.js';
 
 import { AbstractEntity } from '../../helpers/abstract-entity/abstract.entity';
 import { ToBoolean } from '../../helpers/boolean-decorator/boolean.decorator';
@@ -19,8 +19,8 @@ import {
 import { Category } from '../categories/categories.entity';
 
 export enum ExpenseType {
-	EXPENSE = 'Dépense',
-	INCOME = 'Revenu',
+	EXPENSE = 'expense',
+	INCOME = 'income',
 }
 
 @Entity({
@@ -30,11 +30,18 @@ export class Expense extends AbstractEntity {
 	@Column()
 	@IsString()
 	@IsNotEmpty()
+	@ApiProperty()
 	name!: string;
+
+	@Column({ nullable: true })
+	@IsString()
+	@ApiPropertyOptional()
+	description?: string;
 
 	@Column({ enum: ExpenseType })
 	@IsEnum(ExpenseType)
 	@IsNotEmpty()
+	@ApiProperty({ enum: ExpenseType })
 	type!: ExpenseType;
 
 	@Column({
@@ -46,16 +53,19 @@ export class Expense extends AbstractEntity {
 	@Transform(({ value }) => DecimalToString(value), { toPlainOnly: true })
 	@IsNumber()
 	@IsNotEmpty()
-	amount!: Decimal;
+	@ApiProperty()
+	amount!: number;
 
 	@Column({ type: 'timestamp' })
 	@IsDate()
 	@IsNotEmpty()
+	@ApiProperty()
 	date!: Date;
 
 	@Column({ type: 'boolean', default: false })
 	@IsBoolean()
 	@ToBoolean()
+	@ApiPropertyOptional()
 	isRecurrent?: boolean;
 
 	@ManyToOne(() => Category, (category) => category.expenses)
