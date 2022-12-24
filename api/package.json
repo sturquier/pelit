@@ -1,6 +1,6 @@
 {
 	"name": "pelit",
-	"description": "Pelit application",
+	"description": "Pelit API",
 	"version": "1.0.0",
 	"author": "Simon Turquier",
 	"private": true,

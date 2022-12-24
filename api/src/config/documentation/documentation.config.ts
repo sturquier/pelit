@@ -21,7 +21,7 @@ export const createDocumentation = (
 
 	SwaggerModule.setup('', app, document, {
 		customfavIcon: '/logo.svg',
-		customSiteTitle: 'Pelit',
+		customSiteTitle: 'Pelit API',
 		swaggerOptions: {
 			tagsSorter: 'alpha',
 			operationsSorter: 'alpha',
